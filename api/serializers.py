@@ -1,14 +1,29 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from .models.mango import Mango
+from .models.image import Image
 from .models.user import User
+from .models.house import House
+from .models.booking import Booking
 
-
-class MangoSerializer(serializers.ModelSerializer):
+class ImageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Mango
-        fields = ('id', 'name', 'color', 'ripe', 'owner')
+        model = Image
+        fields = ['url']
+
+class HouseSerializer(serializers.ModelSerializer):
+    images = ImageSerializer(many=True, read_only=True)
+    class Meta:
+      model = House
+      fields = ('name', 'description', 'city', 'country', 'price', 'images', 'amenities')
+
+class BookingSerializer(serializers.ModelSerializer):
+    class Meta:
+      model = Booking
+      fields = ('__all__')
+
+class BookingReadSerializer(BookingSerializer):
+    property = HouseSerializer(read_only=True)
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

@@ -2,7 +2,9 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from .models.user import User
-from .models.mango import Mango
+from .models.booking import Booking
+from .models.house import House
+from .models.image import Image
 
 class UserAdmin(BaseUserAdmin):
     ordering = ['id']
@@ -39,4 +41,6 @@ class UserAdmin(BaseUserAdmin):
 # register the model and tell Django to use the above UserAdmin
 # class to format the pages:
 admin.site.register(User, UserAdmin)
-admin.site.register(Mango)
+admin.site.register(Booking)
+admin.site.register(House)
+admin.site.register(Image)
