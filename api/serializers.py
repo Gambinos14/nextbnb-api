@@ -11,16 +11,17 @@ class ImageSerializer(serializers.ModelSerializer):
         model = Image
         fields = ['url']
 
-class HouseSerializer(serializers.ModelSerializer):
-    images = ImageSerializer(many=True, read_only=True)
-    class Meta:
-      model = House
-      fields = ('name', 'description', 'city', 'country', 'price', 'images', 'amenities')
-
 class BookingSerializer(serializers.ModelSerializer):
     class Meta:
       model = Booking
       fields = ('__all__')
+
+class HouseSerializer(serializers.ModelSerializer):
+    images = ImageSerializer(many=True, read_only=True)
+    bookings = BookingSerializer(many=True, read_only=True)
+    class Meta:
+      model = House
+      fields = ('id', 'name', 'description', 'city', 'country', 'price', 'images', 'amenities', 'bookings')
 
 class BookingReadSerializer(BookingSerializer):
     property = HouseSerializer(read_only=True)

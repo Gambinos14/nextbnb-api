@@ -1,6 +1,6 @@
 from django.urls import path
 from .views.user_views import SignUp, SignIn, SignOut, ChangePassword
-from .views.house_views import Houses, HouseSearch
+from .views.house_views import Houses, HouseSearch, HouseFeatured, HouseDetail
 from .views.booking_views import Bookings, BookingDetail
 
 urlpatterns = [
@@ -11,6 +11,8 @@ urlpatterns = [
     path('change-pw/', ChangePassword.as_view(), name='change-pw'),
     path('houses/', Houses.as_view(), name='houses-index'),
     path('houses/<slug:slug>/', HouseSearch.as_view(), name='house-search'),
+    path('houses/featured/<slug:slug>/', HouseFeatured.as_view(), name='house-featured'),
+    path('houses/id/<int:pk>/', HouseDetail.as_view(), name='houses-show'),
     path('bookings/', Bookings.as_view(), name='bookings-index'),
     path('bookings/<int:pk>/', BookingDetail.as_view(), name='bookings-show'),
 ]
