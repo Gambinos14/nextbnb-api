@@ -21,7 +21,7 @@ class HouseSerializer(serializers.ModelSerializer):
     bookings = BookingSerializer(many=True, read_only=True)
     class Meta:
       model = House
-      fields = ('id', 'name', 'description', 'city', 'country', 'price', 'images', 'amenities', 'bookings', 'longitude', 'latitude')
+      fields = ('id', 'name', 'description', 'city', 'country', 'price', 'images', 'amenities', 'bookings', 'longitude', 'latitude', 'guests', 'bedrooms', 'baths', 'beds')
 
 class BookingReadSerializer(BookingSerializer):
     property = HouseSerializer(read_only=True)
