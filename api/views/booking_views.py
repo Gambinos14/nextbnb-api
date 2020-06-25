@@ -12,19 +12,17 @@ from ..serializers import BookingReadSerializer
 
 
 class Bookings(generics.ListCreateAPIView):
-  permission_classes = ()
-  authentication_classes = ()
   queryset = ''
   serializer_class = BookingSerializer
 
   def get(self, request):
-    bookings = Booking.objects.all()
+    bookings = Booking.objects.filter(guest=request.user.id)
     data = BookingReadSerializer(bookings, many=True).data
     ordered_dates = sorted(data, key=itemgetter('start'))
     return Response(ordered_dates)
 
   def post(self, request):
-    # request.data.['booking']['owner'] = request.user.guest
+    request.data['booking']['guest'] = request.user.id
     booking = BookingSerializer(data=request.data['booking'])
     if booking.is_valid():
       booking.save()
@@ -33,36 +31,36 @@ class Bookings(generics.ListCreateAPIView):
       return Response(booking.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class BookingDetail(generics.RetrieveUpdateDestroyAPIView):
-  permission_classes = ()
-  authentication_classes = ()
   queryset = ''
   serializer_class = BookingSerializer
+
   def get(self, request, pk):
     booking = get_object_or_404(Booking, pk=pk)
     data = BookingReadSerializer(booking).data
 
-    # if not request.user.id === data['owner']:
-    #   raise PermissionDenied('Unauthorized. You do not own this reservation.')
+    if not request.user.id == data['guest']:
+      raise PermissionDenied('Unauthorized. You do not own this reservation.')
     return Response(data)
 
   def delete(self, request, pk):
     booking = get_object_or_404(Booking, pk=pk)
-    # data = BookingSerializer(booking).data
-    # if not request.user.id === data['owner']:
-    #   raise PermissionDenied('Unauthorized. You do not own this reservation.')
+    data = BookingSerializer(booking).data
+    if not request.user.id == data['guest']:
+      raise PermissionDenied('Unauthorized. You do not own this reservation.')
     booking.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
   def partial_update(self, request, pk):
-    # if request.data['booking'].get('owner', False):
-    #   del request.data['booking']['owner']
+    if request.data['booking'].get('guest', False):
+      del request.data['booking']['guest']
 
     booking = get_object_or_404(Booking, pk=pk)
-    # data = BookingReadSerializer(booking).data
-    # if not request.user.id === data['owner']:
-    # raise PermissionDenied('Unauthorized. You do not own this reservation.')
+    data = BookingReadSerializer(booking).data
 
-    # request.data['booking']['owner'] = request.user.id
+    if not request.user.id == data['guest']:
+      raise PermissionDenied('Unauthorized. You do not own this reservation.')
+
+    request.data['booking']['guest'] = request.user.id
 
     updatedBooking = BookingSerializer(booking, data=request.data['booking'], partial=True)
     if updatedBooking.is_valid():
