@@ -30,7 +30,7 @@ if os.getenv('ENV') == 'development':
       'PASSWORD': 'Stefano101411'
   }
   DEBUG = True
-  CORS_ORIGIN_WHITELIST = ['http://localhost:7165']
+  CORS_ORIGIN_WHITELIST = ['http://localhost:7165', 'https://gambinos14.github.io']
 else:
   DB = dj_database_url.config()
   DEBUG = False
