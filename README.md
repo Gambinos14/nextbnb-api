@@ -47,6 +47,50 @@ to overcome those by giving queryset the value of an empty string.
 * As a signed in user, I would like to see all my reservations.
 * As a signed in user, I would like to view individual reservation details
 
+### Preparation Steps for Installation
+
+1. Fork and clone this repository.
+2. Move into the new project and ```git init```.
+3. Create and checkout to a new branch for your work.
+4. Open the repository in Atom with atom .
+5. Create a ```.env``` file
+6. In the .env file add a key ```ENV``` with the value ```development``` exactly.
+7. Run ```pipenv shell``` to start up your virtual environment.
+8. Run ```pipenv install``` to install dependencies.
+9. Create a psql database for your project
+    a. Type ```psql``` to get into interactive shell.
+    b. Run ```CREATE DATABASE "project_db_name"```; where ```project_db_name``` is the name you want for your database.
+10. Add the database name to the ```.env file``` using the key ```DB_NAME_DEV```.
+11. Replace all instances of ```nextbnb-api``` with a new name. This includes the folder included in this repository.
+12. Generate a secret key using [this tool](https://djecrety.ir/) and add it to the ```.env``` file using the key ```SECRET```.
+13. Run ```python manage.py makemigrations```.
+14. Finally, run ```python manage.py migrate```.
+15. Start up the server with ```python manage.py runserver```.
+
+### API Routes
+
+Auth Routes:
+
+POST sign-up/
+POST sign-in/
+DELETE sign-out/
+POST change-pw/
+
+House Routes:
+
+GET houses/
+GET houses/:slug/
+GET houses/featured/:slug/
+GET houses/id/:pk/
+
+Booking Routes:
+
+GET bookings/
+POST bookings/
+GET bookings/:pk/
+PATCH bookings/:pk/
+DELETE bookings/:pk/
+
 ### Technologies Used
 
 - Python
