@@ -60,7 +60,7 @@ to overcome those by giving queryset the value of an empty string.
 9. Create a psql database for your project
     a. Type ```psql``` to get into interactive shell.
     b. Run ```CREATE DATABASE "project_db_name"```; where ```project_db_name``` is the name you want for your database.
-10. Add the database name to the ```.env file``` using the key ```DB_NAME_DEV```.
+10. Add the database name to the ```.env``` file using the key ```DB_NAME_DEV```.
 11. Replace all instances of ```nextbnb-api``` with a new name. This includes the folder included in this repository.
 12. Generate a secret key using [this tool](https://djecrety.ir/) and add it to the ```.env``` file using the key ```SECRET```.
 13. Run ```python manage.py makemigrations```.
@@ -71,25 +71,25 @@ to overcome those by giving queryset the value of an empty string.
 
 Auth Routes:
 
-POST sign-up/
-POST sign-in/
-DELETE sign-out/
-POST change-pw/
+- POST sign-up/
+- POST sign-in/
+- DELETE sign-out/
+- POST change-pw/
 
 House Routes:
 
-GET houses/
-GET houses/:slug/
-GET houses/featured/:slug/
-GET houses/id/:pk/
+- GET houses/
+- GET houses/:slug/
+- GET houses/featured/:slug/
+- GET houses/id/:pk/
 
 Booking Routes:
 
-GET bookings/
-POST bookings/
-GET bookings/:pk/
-PATCH bookings/:pk/
-DELETE bookings/:pk/
+- GET bookings/
+- POST bookings/
+- GET bookings/:pk/
+- PATCH bookings/:pk/
+- DELETE bookings/:pk/
 
 ### Technologies Used
 
