@@ -74,7 +74,7 @@ Auth Routes:
 - POST sign-up/
 - POST sign-in/
 - DELETE sign-out/
-- POST change-pw/
+- PATCH change-pw/
 
 House Routes:
 
