@@ -18,4 +18,3 @@ whitenoise = "*"
 
 [requires]
 python_version = "3.7"
-stripe = "2.48.0,<3.0"
