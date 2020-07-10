@@ -18,6 +18,7 @@ import dj_database_url
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
+
 # Determine if we are on local or production
 # Development: Use the DB name defined in the `.env` file
 # Production: Let dj_database_url figure it out based on the config
@@ -63,6 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'stripe',
 ]
 
 MIDDLEWARE = [

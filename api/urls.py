@@ -2,6 +2,7 @@ from django.urls import path
 from .views.user_views import SignUp, SignIn, SignOut, ChangePassword
 from .views.house_views import Houses, HouseSearch, HouseFeatured, HouseDetail
 from .views.booking_views import Bookings, BookingDetail
+from .views.payments import Pay
 
 urlpatterns = [
 	# Restful routing
@@ -15,4 +16,5 @@ urlpatterns = [
     path('houses/id/<int:pk>/', HouseDetail.as_view(), name='houses-show'),
     path('bookings/', Bookings.as_view(), name='bookings-index'),
     path('bookings/<int:pk>/', BookingDetail.as_view(), name='bookings-show'),
+    path('pay/', Pay.as_view(), name='payment')
 ]
